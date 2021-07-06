@@ -1,3 +1,4 @@
+import logging
 import pickle
 
 
@@ -7,5 +8,6 @@ def save_obj(obj, name ):
 
 
 def load_obj(name):
+    print(len(name))
     with open('obj/' + name + '.pkl', 'rb') as f:
         return pickle.load(f)

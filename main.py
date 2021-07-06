@@ -4,7 +4,6 @@ import serializer
 
 
 #
-# TODO
 # 1. сериялизатор
 # 2. Админ панельч
 #
@@ -19,6 +18,11 @@ buttonWords = ["cb_Обновить", "cb_Двойное обновление", 
 
 
 # Handle all other messages.
+
+
+
+
+
 @bot.message_handler(func=lambda message: isMessageToIgnore(message),
                      content_types=['audio', 'photo', 'voice', 'video', 'document',
                                     'text', 'location', 'contact', 'sticker'])
@@ -30,6 +34,7 @@ def isMessageToIgnore(message):
     flag = False
     if message.text[0] != '/':
         flag = True
+    print(message.text)
     return flag
 
 
@@ -50,6 +55,18 @@ def printUsers():
 def callback_query(message):
     nextWord = buttonWords[(buttonWords.index(message.data) + 1) % len(buttonWords)][3:]
     updateResults(message, nextWord)
+
+
+
+@bot.message_handler(commands='infa')
+def sendInfaReses(message):
+    try:
+        dayInf = message.text.split()[1]
+        users[message.from_user.id].setDayInf(dayInf)
+        bot.send_message(message.from_user.id,users[message.from_user.id].getInfa())
+    except:
+        pass
+
 
 
 # TODO
@@ -89,7 +106,6 @@ def addNewUser(message):
         bot.reply_to(message, 'Cookie не был получен, соблюдай пример из /start')
 
 
-
 if __name__ == "__main__":
     try:
         users = serializer.load_obj("users")
@@ -99,4 +115,6 @@ if __name__ == "__main__":
         bot.polling(none_stop=True)
     except Exception as e:
         print(e)
+
+
 
