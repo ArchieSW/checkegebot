@@ -28,3 +28,4 @@ def getResults(participant):
         results['Сочинение'] = 'Незачет'
 
     return results
+
