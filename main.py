@@ -9,7 +9,7 @@ import serializer
 #
 
 
-TOKEN = '1737697318:AAGk5-yqnQXmew0eGdYX2dp_JPXRtezJQKA'
+TOKEN = 'TOKEN'
 bot = telebot.TeleBot(TOKEN)
 users = {}
 
